@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vexon Hub - Modern Roblox Script Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-hover: #7c3aed;
+            --secondary: #a855f7;
+            --accent: #c084fc;
+            --bg-dark: #0a0b14;
+            --bg-card: #1a1625;
+            --bg-card-hover: #24213a;
+            --text: #ffffff;
+            --text-muted: #a1a1aa;
+            --border: #3f3f46;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.1), 0 2px 4px -1px rgba(139, 92, 246, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(139, 92, 246, 0.1), 0 4px 6px -2px rgba(139, 92, 246, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(139, 92, 246, 0.1), 0 10px 10px -5px rgba(139, 92, 246, 0.04);
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-hover: linear-gradient(135deg, var(--primary-hover), var(--accent));
+        }
+
+        [data-theme="light"] {
+            --bg-dark: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f1f5f9;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 22, 37, 0.95);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="light"] header {
+            background: rgba(248, 250, 252, 0.95);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.1));
+            border-radius: 0 0 2rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: var(--gradient-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+        }
+
+        .btn-stats {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-stats:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Quick Script Section */
+        .quick-script {
+            padding: 3rem 0;
+            background: var(--bg-card);
+        }
+
+        .quick-script-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quick-script h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .quick-script p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .script-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hidden-script {
+            display: none;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            color: var(--success);
+            font-size: 0.9rem;
+            position: relative;
+            overflow-x: auto;
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-hover);
+        }
+
+        /* Supported Games */
+        .supported-games {
+            padding: 4rem 0;
+            background: var(--bg-dark);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .game-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .game-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .game-item:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-working {
+            background: var(--success);
+        }
+
+        .status-reworked {
+            background: var(--primary);
+        }
+
+        .status-broken {
+            background: var(--error);
+        }
+
+        .game-name {
+            font-weight: 600;
+            color: var(--text);
+            font-size: 0.9rem;
+        }
+
+        .status-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Executors */
+        .executors {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text);
+        }
+
+        .executor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .executor-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .executor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .executor-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .executor-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .executor-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .executor-card h4 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .executor-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Features */
+        .features {
+            padding: 4rem 0;
+            background: var(--bg-card);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            border-top: 1px solid var(--border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-buttons, .script-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .executor-grid, .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .status-legend {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: var(--error);
+        }
+
+        .notification.warning {
+            background: var(--warning);
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="https://github.com/HeeditZ/muye-hub/blob/main/vexonhub.webp?raw=true" alt="Vexon Hub">
+                    Vexon Hub
+                </a>
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#script">Script</a></li>
+                        <li><a href="#games">Games</a></li>
+                        <li><a href="#executors">Executors</a></li>
+                        <li><a href="#features">Features</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Vexon Hub</h1>
+                <p>Premium Roblox script hub with modern UI, optimized performance, and undetected execution for your favorite games.</p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" onclick="copyMainScript()">
+                        <i class="fas fa-copy"></i>
+                        Copy Script
+                    </button>
+                    <a href="https://is.gd/stats.php?url=VexonHubUsers" class="btn btn-stats" target="_blank">
+                        <i class="fas fa-chart-line"></i>
+                        Live Statistics
+                    </a>
+                    <a href="https://discord.gg/ZW9nTaSN9u" class="btn btn-secondary" target="_blank">
+                        <i class="fab fa-discord"></i>
+                        Join Discord
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Script Section -->
+        <section id="script" class="quick-script">
+            <div class="container">
+                <div class="quick-script-container">
+                    <h2>Vexon Hub Script</h2>
+                    <p>One script to rule them all! Our universal script loader with key system protection.</p>
+                    <div class="script-actions">
+                        <button class="btn btn-primary" onclick="copyMainScript()">
+                            <i class="fas fa-copy"></i>
+                            Copy Script
+                        </button>
+                        <button class="btn btn-secondary" onclick="toggleScript()">
+                            <i class="fas fa-eye"></i>
+                            Show Script
+                        </button>
+                    </div>
+                    <div class="hidden-script" id="hiddenScript">
+                        <span id="mainScript">loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()</span>
+                        <button class="copy-btn" onclick="copyMainScript()">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Supported Games -->
+        <section id="games" class="supported-games">
+            <div class="container">
+                <h2 class="section-title">Supported Games</h2>
+                <div class="games-grid">
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Murder Mystery 2</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-reworked"></div>
+                        <div class="game-name">The Strongest Battle Grounds</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Slap Battles</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Build a Boat For Treasure</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Universal</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Natural Disaster Survival</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Ninja Legends</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Grow a Garden</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Dead Rails</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Steal a Brainrot</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-broken"></div>
+                        <div class="game-name">Ink Game</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Brook Haven</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-working"></div>
+                        <div class="game-name">Bee Swarm</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-reworked"></div>
+                        <div class="game-name">99 Night In The Forest</div>
+                    </div>
+                    <div class="game-item fade-in">
+                        <div class="status-indicator status-reworked"></div>
+                        <div class="game-name">Doors</div>
+                    </div>
+                </div>
+                
+                <div class="status-legend">
+                    <div class="legend-item">
+                        <div class="status-indicator status-working"></div>
+                        <span>Working</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="status-indicator status-reworked"></div>
+                        <span>Reworked With WindUI, Working</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="status-indicator status-broken"></div>
+                        <span>Not Working</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Executors -->
+        <section id="executors" class="executors">
+            <div class="container">
+                <h2 class="section-title">Supported Executors</h2>
+                <div class="executor-grid">
+                    <div class="executor-card fade-in">
+                        <div class="executor-icon">💎</div>
+                        <h4>Swift</h4>
+                        <p>Lightweight, powerful and fast executor.</p>
+                        <a href="https://getswift.vip" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">Download</a>
+                    </div>
+
+                    <div class="executor-card fade-in">
+                        <div class="executor-icon">🚀</div>
+                        <h4>Velocity</h4>
+                        <p>High-performance executor for demanding scripts.</p>
+                        <a href="https://getvelocity.live" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">Download</a>
+                    </div>
+
+                    <div class="executor-card fade-in">
+                        <div class="executor-icon">⭐</div>
+                        <h4>Xeno</h4>
+                        <p>A free executor with really good features.</p>
+                        <a href="https://xeno.onl" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">Download</a>
+                    </div>
+
+                    <div class="executor-card fade-in">
+                        <div class="executor-icon">⚡</div>
+                        <h4>Solara</h4>
+                        <p>Fast and reliable executor with simple features.</p>
+                        <a href="https://getsolara.dev" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">Download</a>
+                    </div>
+
+                    <div class="executor-card fade-in">
+                        <div class="executor-icon">🔥</div>
+                        <h4>Wave</h4>
+                        <p>Powerful paid executor with excellent compatibility.</p>
+                        <a href="#" target="_blank" class="btn btn-primary" style="margin-top: 1rem;">Download</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Vexon Hub?</h2>
+                <div class="feature-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Undetected</h3>
+                        <p>Advanced anti-detection technology keeps you safe from bans while using our scripts.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>High Performance</h3>
+                        <p>Optimized code ensures smooth gameplay without lag or performance issues.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>Regular Updates</h3>
+                        <p>Our scripts are constantly updated to work with the latest game versions.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Friendly</h3>
+                        <p>Clean UI that works perfectly on both desktop and mobile devices.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Community</h3>
+                        <p>Join thousands of users in our Discord community for support and updates.</p>
+                    </div>
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h3>Key System</h3>
+                        <p>Secure key system to protect the script from unauthorized access.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Vexon Hub. Made with ❤️ by DiosDi | Not affiliated with Roblox Corporation</p>
+        </div>
+    </footer>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Script copied to clipboard!</span>
+    </div>
+
+    <script>
+        // Theme Toggle - Fixed Implementation
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to dark
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        
+        // Apply saved theme on load
+        if (currentTheme === 'light') {
+            body.setAttribute('data-theme', 'light');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            body.removeAttribute('data-theme');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            if (body.hasAttribute('data-theme')) {
+                // Switch to dark mode
+                body.removeAttribute('data-theme');
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'dark');
+                currentTheme = 'dark';
+            } else {
+                // Switch to light mode
+                body.setAttribute('data-theme', 'light');
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'light');
+                currentTheme = 'light';
+            }
+        });
+
+        // Main script
+        const mainScript = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/DiosDi/VexonHub/refs/heads/main/VexonHub"))()';
+
+        // Script visibility toggle
+        function toggleScript() {
+            const hiddenScript = document.getElementById('hiddenScript');
+            const toggleBtn = document.querySelector('button[onclick="toggleScript()"]');
+            
+            if (hiddenScript.style.display === 'none' || hiddenScript.style.display === '') {
+                hiddenScript.style.display = 'block';
+                toggleBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Script';
+            } else {
+                hiddenScript.style.display = 'none';
+                toggleBtn.innerHTML = '<i class="fas fa-eye"></i> Show Script';
+            }
+        }
+
+        // Copy main script function
+        function copyMainScript() {
+            copyToClipboard(mainScript, 'Script copied to clipboard!');
+        }
+
+        // Copy to clipboard function
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification(message, 'success');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showNotification('Failed to copy script!', 'error');
+            });
+        }
+
+        // Notification System
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            
+            notificationText.textContent = message;
+            
+            // Reset classes
+            notification.classList.remove('error', 'warning', 'success');
+            
+            // Add appropriate class
+            if (type === 'error') {
+                notification.classList.add('error');
+                notification.querySelector('i').className = 'fas fa-exclamation-circle';
+            } else if (type === 'warning') {
+                notification.classList.add('warning');
+                notification.querySelector('i').className = 'fas fa-exclamation-triangle';
+            } else {
+                notification.classList.add('success');
+                notification.querySelector('i').className = 'fas fa-check-circle';
+            }
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Initialize animations on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const elementsToAnimate = document.querySelectorAll('.fade-in');
+            elementsToAnimate.forEach(el => {
+                observer.observe(el);
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.executor-card, .feature-card, .game-item');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    if (!card.style.transform.includes('translateY')) {
+                        card.style.transform = 'translateY(-5px)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Add pulse effect to primary buttons
+            const primaryButtons = document.querySelectorAll('.btn-primary');
+            primaryButtons.forEach(button => {
+                button.addEventListener('mouseenter', () => {
+                    button.style.animation = 'pulse 0.6s ease';
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    button.style.animation = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
